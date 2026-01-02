@@ -1,0 +1,74 @@
+[[ $- != *i* ]] && return
+
+#if uwsm check may-start; then
+#    exec uwsm start hyprland-uwsm.desktop
+#fi
+
+export FZF_BASE=/usr/bin/fzf
+
+#pre OMZ
+
+export ZSH="$HOME/.oh-my-zsh"
+
+
+#ZSH_THEME="robby"
+
+plugins=( dotenv docker fzf gh git npm pm2 postgres ssh sudo systemadmin systemd vscode zoxide zsh-autosuggestions zsh-syntax-highlighting )
+
+source $ZSH/oh-my-zsh.sh
+
+export LANG=en_US.UTF-8
+
+# Bun
+#export PATH="/home/juned/.cache/.bun/bin:$PATH"
+export PATH="/home/juned/.bun/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/juned/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# yazi-cwd
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+export EDITOR=nvim
+export VISUAL=nvim
+
+# Custom aliases
+alias refresh-mirrors="sudo reflector -c IN -p https --latest 10 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist"
+alias arch-wall="sudo cp Pictures/walls/wall1.png /usr/share/hypr/wall1.png"
+alias speed_wall="sudo cp Pictures/walls/speedrun.png /usr/share/hypr/wall1.png"
+
+alias display-tv="mv /home/juned/.config/hypr/hyprland.conf /home/juned/.config/hypr/hyprland1.conf && mv /home/juned/.config/hypr/hyprland2.conf /home/juned/.config/hypr/hyprland.conf"
+
+alias display-laptop="mv /home/juned/.config/hypr/hyprland.conf /home/juned/.config/hypr/hyprland2.conf && mv /home/juned/.config/hypr/hyprland1.conf /home/juned/.config/hypr/hyprland.conf"
+
+alias c="clear"
+alias l="eza --group-directories-first --long --icons --git"
+alias ll="eza --group-directories-first --long --icons --git --all"
+alias tree="eza --tree --level"
+
+alias b5="brightnessctl set 50%"
+
+alias cdc="cd /home/juned/Documents/code && clear"
+alias t="btop"
+alias ff="fastfetch"
+alias v="nvim"
+alias lg="lazygit"
+alias enco="bluetoothctl connect 84:0F:2A:00:10:77"
+alias boat="bluetoothctl connect 41:42:A7:30:93:6F"
+alias vi="nvim"
+alias vim="nvim"
+
+#end of zsh
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"

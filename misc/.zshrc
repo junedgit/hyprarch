@@ -32,13 +32,13 @@ esac
 # pnpm end
 
 # yazi-cwd
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
+#   function y() {
+#      local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+#      yazi "$@" --cwd-file="$tmp"
+#      IFS= read -r -d '' cwd < "$tmp"
+#      [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+#      rm -f -- "$tmp"
+#   }
 
 export EDITOR=nvim
 export VISUAL=nvim
@@ -57,6 +57,7 @@ alias l="eza --group-directories-first --long --icons --git"
 alias ll="eza --group-directories-first --long --icons --git --all"
 alias tree="eza --tree --level"
 
+alias b3="brightnessctl set 30%"
 alias b5="brightnessctl set 50%"
 
 alias cdc="cd /home/juned/Documents/code && clear"
@@ -68,7 +69,22 @@ alias enco="bluetoothctl connect 84:0F:2A:00:10:77"
 alias boat="bluetoothctl connect 41:42:A7:30:93:6F"
 alias vi="nvim"
 alias vim="nvim"
+alias zz="spf"
+alias p1="nmcli device wifi connect phone1"
+alias ws="nmcli device wifi rescan"
+
+# Clang
+alias cclang='clang -std=c23 -Wall -Wextra -Wpedantic -Werror \
+-Wshadow -Wconversion -Wsign-conversion \
+-fsanitize=address,undefined \
+-fstack-protector-strong \
+-fno-omit-frame-pointer \
+-g3 -O0'
+
+alias cclang_rel='clang -std=c23 -Wall -Wextra -Wpedantic \
+-O2 -DNDEBUG'
 
 #end of zsh
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+# eval "$(zellij setup --generate-auto-start zsh)"

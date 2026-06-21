@@ -1,0 +1,54 @@
+# Low-Level Systems / Kernel-Oriented clang-format
+# Intent: C-first, diff-friendly, SSH-friendly, kernel-trained eyes
+
+BasedOnStyle: LLVM
+Language: C
+
+# Indentation & Layout
+UseTab: Always
+TabWidth: 8
+IndentWidth: 8
+ContinuationIndentWidth: 8
+ColumnLimit: 80
+
+# Braces & Control Flow
+BreakBeforeBraces: Linux
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+
+# Switches & Case
+IndentCaseLabels: false
+AllowShortCaseLabelsOnASingleLine: false
+
+# Spacing Rules
+SpaceAfterCStyleCast: true
+SpacesInContainerLiterals: false
+SpaceBeforeParens: ControlStatements
+SpaceBeforeAssignmentOperators: true
+
+# Pointer & Reference Style (C reality)
+PointerAlignment: Right
+DerivePointerAlignment: false
+
+# Alignment (avoid diff noise)
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignOperands: false
+
+# Line Breaking
+BreakBeforeBinaryOperators: None
+BreakStringLiterals: true
+AlwaysBreakAfterReturnType: None
+
+# Comments
+ReflowComments: false
+
+# Includes
+SortIncludes: false
+
+# Misc Discipline
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+Cpp11BracedListStyle: false
